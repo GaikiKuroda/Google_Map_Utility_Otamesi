@@ -67,13 +67,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             mapCluster.onCameraIdle()
         }
 
-
         // Cluster関連の解説なので邪魔なデフォルトのボタン類を非表示
         googleMap?.uiSettings?.isMyLocationButtonEnabled = false
         // 屋内マップを非表示にする
         googleMap?.isIndoorEnabled = false
         mapCluster.renderer.setAnimation(false)
 
+        //MAPのクラスター描画を実行してあげる
         mapCluster.cluster()
 
         googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(35.6900, 139.7000), 6F))
