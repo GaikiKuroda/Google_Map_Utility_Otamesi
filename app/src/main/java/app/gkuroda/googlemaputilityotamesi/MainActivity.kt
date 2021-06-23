@@ -71,6 +71,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         googleMap?.uiSettings?.isMyLocationButtonEnabled = false
         // 屋内マップを非表示にする
         googleMap?.isIndoorEnabled = false
+
+        mapCluster.renderer = CustomClusterRenderer(this, googleMap, mapCluster)
         mapCluster.renderer.setAnimation(false)
 
         //MAPのクラスター描画を実行してあげる

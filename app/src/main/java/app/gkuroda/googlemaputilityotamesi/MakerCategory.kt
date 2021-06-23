@@ -1,8 +1,16 @@
 package app.gkuroda.googlemaputilityotamesi
 
-enum class MakerCategory(val id: Int) {
-    POST(1),
-    TELEPHONE(2),
-    PARK(3),
-    OTHER(4)
+import androidx.annotation.DrawableRes
+
+enum class MakerCategory(val id: Int, @DrawableRes val icon: Int) {
+    POST(1, R.drawable.post),
+    TELEPHONE(2, R.drawable.telephone),
+    PARK(3, R.drawable.park),
+    OTHER(4, R.drawable.other);
+
+    companion object {
+        fun typeOf(categoryId: Int): MakerCategory {
+            return values().firstOrNull { it.id == categoryId } ?: OTHER
+        }
+    }
 }
