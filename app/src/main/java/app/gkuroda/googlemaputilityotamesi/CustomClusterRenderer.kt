@@ -72,18 +72,26 @@ class CustomClusterRenderer(
                 in 0 until 10 -> {
                     //それぞれにあったアイコンを指定
                     clusterIcon = ContextCompat.getDrawable(context, R.drawable.cluster_a)
+                    //アイコンのテキスト表示位置の調整
+                    clusterIconGenerator.setContentPadding(0, 60, 0, 0)
                     clusterText = clusterSize.toString()
                 }
                 in 10 until 100 -> {
                     clusterIcon = ContextCompat.getDrawable(context, R.drawable.cluster_b)
+                    //アイコンのテキスト表示位置の調整
+                    clusterIconGenerator.setContentPadding(60, 0, 0, 0)
                     clusterText = "${(clusterSize / 10)}0+"
                 }
                 in 100 until 1000 -> {
                     clusterIcon = ContextCompat.getDrawable(context, R.drawable.cluster_c)
+                    //アイコンのテキスト表示位置の調整
+                    clusterIconGenerator.setContentPadding(0, 0, 60, 0)
                     clusterText = "${(clusterSize / 100)}00+"
                 }
                 in 1000 until 10000 -> {
                     clusterIcon = ContextCompat.getDrawable(context, R.drawable.cluster_d)
+                    //アイコンのテキスト表示位置の調整
+                    clusterIconGenerator.setContentPadding(0, 0, 0, 90)
                     clusterText = "${(clusterSize / 1000)}000+"
                 }
             }
