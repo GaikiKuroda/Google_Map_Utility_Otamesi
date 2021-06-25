@@ -1,6 +1,7 @@
 package app.gkuroda.googlemaputilityotamesi
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -51,11 +52,35 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         //マーカーのアイコンをタップしたときの動作
         mapCluster.setOnClusterItemClickListener {
 
+            val item = it.getMakerDescription()
+
+            val messageText =
+                """
+                    名前:${item.name}
+                    カテゴリ:${MakerCategory.typeOf(item.makerCategory).categoryText}
+                    コメント:${item.comment}
+                    座標:${it.position}
+                """.trimIndent()
+
+            AlertDialog.Builder(this)
+                .setTitle("${item.name} ")
+                .setMessage(messageText)
+                .setPositiveButton("閉じる", null)
+                .show()
+
             return@setOnClusterItemClickListener true
         }
 
         //クラスターアイコンをタップしたときの動作
         mapCluster.setOnClusterClickListener { cluster ->
+
+            val items = cluster.items.map { it.getMakerDescription() }
+
+            AlertDialog.Builder(this)
+                .setTitle("クラスタ情報 ：先頭3件")
+                .setMessage("${items.take(3)}  \n ... など全${items.size}")
+                .setPositiveButton("閉じる", null)
+                .show()
 
             return@setOnClusterClickListener true
         }
@@ -88,7 +113,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         manager.addItems(initialList)
         return manager
     }
-
 
     private fun makeMapMakers(): List<MapItem> {
         val itemList = mutableListOf<MapItem>()
