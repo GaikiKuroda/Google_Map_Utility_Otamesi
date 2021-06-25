@@ -21,6 +21,7 @@ class CustomClusterRenderer(
 
     override fun onBeforeClusterItemRendered(item: MapItem, markerOptions: MarkerOptions) {
         super.onBeforeClusterItemRendered(item, markerOptions)
+        if (context == null) return
 
         val itemMakerDescription = item.getMakerDescription()
 
@@ -28,7 +29,7 @@ class CustomClusterRenderer(
         val makerCategory = MakerCategory.typeOf(itemMakerDescription.makerCategory)
 
         // マーカーとして使うにはBitmapである必要があるのでDrawableを取得したらBitmapへ変換する
-        val iconBitmap = context?.getDrawable(makerCategory.icon)?.toBitmap()
+        val iconBitmap = ContextCompat.getDrawable(context, makerCategory.icon)?.toBitmap()
 
         if (iconBitmap != null) {
             // 適用するにはBitmapDescriptorという形式である必要があるためbitmapを変換する
