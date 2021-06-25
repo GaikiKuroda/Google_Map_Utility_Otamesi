@@ -61,6 +61,9 @@ class CustomClusterRenderer(
             //確定nullだと面倒なので一番小さいものを詰めておく
             var clusterIcon = ContextCompat.getDrawable(context, R.drawable.cluster_a)
 
+            //アイコンの文字に適用するスタイル
+            clusterIconGenerator.setTextAppearance(context, R.style.MapClusterText)
+
             //アイコンに表示するテキスト
             var clusterText = clusterSize.toString()
 
